@@ -1,0 +1,30 @@
+name: Push and Pull Notifier
+
+on :
+
+push :
+
+branches: [main] # or master if you're using that
+pull_request:
+branches: [main]
+
+jobs :
+notify:
+runs-on: ubuntu-latest
+
+steps :
+
+- name: Checkout code
+
+uses: actions/checkout@v3
+
+echo '
+
+- name: Say pushed or pulled
+run: |
+if [ "${{ github.event_name } }" == "push" ]; then
+You have pushed code to the repository."
+elif [ "${{ github.event_name }}" == "pull_request" ]; then
+A pull request has been opened."
+
+echo"A pull request has be opened"
